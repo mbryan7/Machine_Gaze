@@ -1,6 +1,8 @@
 let capture
 let tracker
 let stars = []  // make star array
+let bouncing_balls = []
+
 
 function setup() {
 
@@ -26,11 +28,25 @@ function setup() {
         stars.push(new_star)
     }
 
+    for (let i=0; i<100; i++) {
+
+    let random_ball = {x: random(0, width),
+                      y: random(0, height),
+                      size: random(1, 5),
+                      vx: random(1, 5),
+                      vy: random(1, 5),
+                      color: [247, 247, 247]
+                    }
+
+    bouncing_balls.push(random_ball)
+
+        }
+
 }
 
 function draw() {
 
-    background(23, 7, 133, 90)
+    background(0, 7, 15)
 
     //showFlippedCapture()
 
@@ -42,12 +58,12 @@ function draw() {
 
 
     // 'features' is an array of objects with x, y properties
-     for (let feature of features) {
-         stroke(255)
-         fill(255)
-         circle(feature.x, feature.y, 4)
-         text(feature.label, feature.x, feature.y)
-     }
+    // for (let feature of features) {
+    //     stroke(255)
+    //     fill(255)
+    //     circle(feature.x, feature.y, 4)
+    //   text(feature.label, feature.x, feature.y)
+    // }
 
     // loop through stars
     for (let star of stars) {
@@ -75,8 +91,8 @@ function draw() {
             let feature = features[index]
 
             // move the star a fraction of the distance toward the feature
-            star.x += (feature.x - star.x) / 20
-            star.y += (feature.y - star.y) / 20
+            star.x += (feature.x - star.x) / 10
+            star.y += (feature.y - star.y) / 10
 
             // give it a little wiggle
             star.x += random(-1, 1)
@@ -111,6 +127,36 @@ function draw() {
         }
 
     }
+
+    for (let ball of bouncing_balls){
+
+
+    fill (ball.color)
+
+
+    circle(ball.x, ball.y, ball.size)
+    ball.x = ball.x + ball.vx
+    ball.y = ball.y + ball.vy
+
+
+
+    if (ball.x >= width) {
+        ball.vx = -ball.vx
+      }
+
+    if (ball.x <= 0) {
+        ball.vx = -ball.vx
+    }
+
+    if (ball.y >= height) {
+        ball.vy = -ball.vy
+    }
+
+    if (ball.y <= 0) {
+        ball.vy = -ball.vy
+         }
+      }
+
 
 }
 
