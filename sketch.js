@@ -70,7 +70,7 @@ function draw() {
 
         // draw the star
         noStroke()
-        fill(255, 214, 8)
+        fill(247, 247, 247)
         drawStar(star.x, star.y, star.radius, 3, 5)
 
         // do this if the mouse is pressed
